@@ -10,7 +10,7 @@ import DATA from "../constants/static-data";
 		<nav>
 			<div class="nav-links">
 				<a href="#about">About</a>
-				<a href="#experience">Experience</a>
+				<a href="#experience">Work & Education</a>
 				<a href="#writings">Writings</a>
 				<a href="#contact">Contact</a>
 			</div>
@@ -24,7 +24,8 @@ import DATA from "../constants/static-data";
 					<p>
 						I craft digital experiences with code and design,
 						focusing on clean, efficient solutions to complex
-						problems. Currently building the future at <a
+						problems. Currently building the future of research
+						decision makers at <a
 							href={DATA.currentOrg.link}
 							target="_blank"
 							rel="noopener">{DATA.currentOrg.name}</a
@@ -44,42 +45,48 @@ import DATA from "../constants/static-data";
 
 		<section class="content">
 			<div class="section-container" id="experience">
-				<h2>Experience</h2>
+				<h2>Work & Education</h2>
 				<ul class="timeline-list">
-					<TimelineItem
-						title="Senior Software Engineer"
-						year="2021 - Present"
-						company="Company Name"
-						description="Led development of key features and mentored junior developers."
-					/>
-					<TimelineItem
-						title="Software Engineer"
-						year="2019 - 2021"
-						company="Previous Company"
-						description="Developed and maintained multiple web applications."
-					/>
-					<TimelineItem
-						title="Bachelor's in Computer Science"
-						year="2013 - 2017"
-						company="University Name"
-						description="Dean's List, Computer Science Society President"
-					/>
+					{
+						DATA.experience.map(
+							({ startDate, endDate, org, title }) => (
+								<TimelineItem
+									title={title}
+									year={`${startDate} - ${endDate}`}
+									company={org}
+									description=""
+								/>
+							),
+						)
+					}
+					{
+						DATA.education.map(
+							({ startDate, endDate, org, title }) => (
+								<TimelineItem
+									title={title}
+									year={`${startDate} - ${endDate}`}
+									company={org}
+									description=""
+								/>
+							),
+						)
+					}
 				</ul>
 			</div>
 
 			<div class="section-container" id="writings">
 				<h2>Writings</h2>
 				<ul class="writings-list">
-					<WritingItem
+					<!-- <WritingItem
 						title="Building Scalable Systems with Rust"
 						year="2023"
 						href="#"
-					/>
-					<WritingItem
+					/> -->
+					<!-- <WritingItem
 						title="The Future of Web Development"
 						year="2023"
 						href="#"
-					/>
+					/> -->
 					<WritingItem
 						title="Understanding Modern JavaScript"
 						year="2022"
@@ -89,28 +96,20 @@ import DATA from "../constants/static-data";
 			</div>
 
 			<div class="section-container" id="contact">
-				<h2>Connect</h2>
+				<h2>Contact</h2>
 				<ul class="links-list">
-					<li>
-						<a
-							href="https://github.com/yourusername"
-							target="_blank"
-							rel="noopener">GitHub</a
-						>
-					</li>
-					<li>
-						<a
-							href="https://twitter.com/yourusername"
-							target="_blank"
-							rel="noopener">Twitter</a
-						>
-					</li>
-					<li>
+					{
+						DATA.contact.map(({ link, name }) => (
+							<li>
+								<a href={link} target="_blank" rel="noopener">
+									{name}
+								</a>
+							</li>
+						))
+					}
+					<!-- <li>
 						<a href="mailto:your@email.com">Email</a>
-					</li>
-					<li>
-						<a href="/resume.pdf" target="_blank">Resume</a>
-					</li>
+					</li> -->
 				</ul>
 			</div>
 		</section>
