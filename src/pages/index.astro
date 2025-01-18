@@ -1,8 +1,294 @@
 ---
-import Welcome from "../components/Welcome.astro";
 import Layout from "../layouts/Layout.astro";
+import TimelineItem from "../components/TimelineItem.astro";
+import WritingItem from "../components/WritingItem.astro";
+import DATA from "../constants/static-data";
 ---
 
-<Layout>
-	<Welcome />
+<Layout title={DATA.name}>
+	<main>
+		<nav>
+			<div class="nav-links">
+				<a href="#about">About</a>
+				<a href="#experience">Experience</a>
+				<a href="#writings">Writings</a>
+				<a href="#contact">Contact</a>
+			</div>
+		</nav>
+
+		<section class="intro" id="about">
+			<div class="intro-content">
+				<h1>{DATA.name}</h1>
+				<p class="subtitle">Software Engineer & Designer</p>
+				<div class="intro-details">
+					<p>
+						I craft digital experiences with code and design,
+						focusing on clean, efficient solutions to complex
+						problems. Currently building the future at <a
+							href={DATA.currentOrg.link}
+							target="_blank"
+							rel="noopener">{DATA.currentOrg.name}</a
+						>.
+					</p>
+				</div>
+			</div>
+			<div class="profile-image">
+				<div class="image-container">
+					<img
+						src="https://as1.ftcdn.net/v2/jpg/08/61/58/26/1000_F_861582695_e3tGRS5lp5D2qQvtL0gHqDALjREBGPik.jpg"
+						alt={DATA.name}
+					/>
+				</div>
+			</div>
+		</section>
+
+		<section class="content">
+			<div class="section-container" id="experience">
+				<h2>Experience</h2>
+				<ul class="timeline-list">
+					<TimelineItem
+						title="Senior Software Engineer"
+						year="2021 - Present"
+						company="Company Name"
+						description="Led development of key features and mentored junior developers."
+					/>
+					<TimelineItem
+						title="Software Engineer"
+						year="2019 - 2021"
+						company="Previous Company"
+						description="Developed and maintained multiple web applications."
+					/>
+					<TimelineItem
+						title="Bachelor's in Computer Science"
+						year="2013 - 2017"
+						company="University Name"
+						description="Dean's List, Computer Science Society President"
+					/>
+				</ul>
+			</div>
+
+			<div class="section-container" id="writings">
+				<h2>Writings</h2>
+				<ul class="writings-list">
+					<WritingItem
+						title="Building Scalable Systems with Rust"
+						year="2023"
+						href="#"
+					/>
+					<WritingItem
+						title="The Future of Web Development"
+						year="2023"
+						href="#"
+					/>
+					<WritingItem
+						title="Understanding Modern JavaScript"
+						year="2022"
+						href="#"
+					/>
+				</ul>
+			</div>
+
+			<div class="section-container" id="contact">
+				<h2>Connect</h2>
+				<ul class="links-list">
+					<li>
+						<a
+							href="https://github.com/yourusername"
+							target="_blank"
+							rel="noopener">GitHub</a
+						>
+					</li>
+					<li>
+						<a
+							href="https://twitter.com/yourusername"
+							target="_blank"
+							rel="noopener">Twitter</a
+						>
+					</li>
+					<li>
+						<a href="mailto:your@email.com">Email</a>
+					</li>
+					<li>
+						<a href="/resume.pdf" target="_blank">Resume</a>
+					</li>
+				</ul>
+			</div>
+		</section>
+	</main>
 </Layout>
+
+<style lang="scss">
+	main {
+		max-width: 780px;
+		margin: 0 auto;
+		padding: 2rem;
+	}
+
+	nav {
+		padding: 1rem 0;
+		margin-bottom: 3rem;
+
+		.nav-links {
+			display: flex;
+			gap: 2rem;
+
+			a {
+				font-size: 0.9rem;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+				border: none;
+			}
+		}
+	}
+
+	.intro {
+		margin: 6rem 0;
+		animation: fadeIn 0.8s ease-out;
+		display: flex;
+		gap: 4rem;
+		align-items: flex-start;
+
+		&-content {
+			flex: 1;
+		}
+
+		&-details {
+			max-width: 85%;
+			font-size: 1.1rem;
+		}
+	}
+
+	.profile-image {
+		flex-shrink: 0;
+		width: 200px;
+		height: 200px;
+
+		.image-container {
+			width: 100%;
+			height: 100%;
+			position: relative;
+			overflow: hidden;
+
+			&::before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: linear-gradient(45deg, var(--accent), transparent);
+				opacity: 0;
+				transition: opacity 0.3s ease;
+				z-index: 1;
+			}
+
+			&:hover {
+				&::before {
+					opacity: 0.6;
+				}
+
+				img {
+					transform: scale(1.1);
+				}
+			}
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				transition: transform 0.3s ease;
+			}
+		}
+	}
+
+	h1 {
+		font-family: "Space Grotesk", sans-serif;
+		font-size: 2.5rem;
+		font-weight: 700;
+		margin-bottom: 0.5rem;
+		line-height: 1.2;
+	}
+
+	.subtitle {
+		color: var(--text-secondary);
+		font-size: 1.25rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.section-container {
+		margin: 4rem 0;
+		animation: fadeIn 0.8s ease-out;
+
+		h2 {
+			font-family: "Space Grotesk", sans-serif;
+			font-size: 1.5rem;
+			font-weight: 500;
+			margin-bottom: 2rem;
+		}
+	}
+
+	.timeline-list,
+	.writings-list {
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+
+	.links-list {
+		list-style: none;
+		display: flex;
+		gap: 2rem;
+		flex-wrap: wrap;
+
+		a {
+			font-weight: 500;
+		}
+	}
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+			transform: translateY(10px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@media (max-width: 768px) {
+		main {
+			padding: 1.5rem;
+		}
+
+		.intro {
+			margin: 4rem 0;
+			flex-direction: column;
+			gap: 2rem;
+
+			&-details {
+				max-width: 100%;
+			}
+		}
+
+		.profile-image {
+			width: 150px;
+			height: 150px;
+			margin: 0 auto;
+		}
+
+		h1 {
+			font-size: 2rem;
+		}
+
+		.nav-links {
+			gap: 1rem;
+			flex-wrap: wrap;
+
+			a {
+				font-size: 0.8rem;
+			}
+		}
+	}
+</style>

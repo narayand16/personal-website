@@ -1,0 +1,78 @@
+---
+interface Props {
+    title: string;
+    year: string;
+    company: string;
+    description: string;
+}
+
+const { title, year, company, description } = Astro.props;
+---
+
+<li class="timeline-item">
+    <div class="timeline-header">
+        <h3>{title}</h3>
+        <span class="year">{year}</span>
+    </div>
+    <p class="company">{company}</p>
+    <p class="description">{description}</p>
+</li>
+
+<style lang="scss">
+    .timeline-item {
+        position: relative;
+        padding: 1.5rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        transition: all 0.3s ease;
+
+        &:hover {
+            transform: translateX(10px);
+            border-color: var(--accent);
+            background: linear-gradient(
+                to right,
+                rgba(var(--accent-rgb), 0.05),
+                rgba(var(--accent-rgb), 0.02)
+            );
+
+            .timeline-header h3 {
+                color: var(--accent);
+            }
+
+            .year {
+                color: var(--accent);
+            }
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.5rem;
+
+            h3 {
+                font-size: 1.1rem;
+                font-weight: 500;
+                transition: color 0.3s ease;
+            }
+        }
+
+        .year {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .company {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            max-width: 90%;
+        }
+    }
+</style>
