@@ -46,6 +46,11 @@ const NAV_MENU_ITEMS = [
 		</nav>
 
 		<section class="intro" id="about">
+			<div class="profile-image">
+				<div class="image-container">
+					<Image src={PassportPhoto} alt={DATA.name} />
+				</div>
+			</div>
 			<div class="intro-content">
 				<h1>{DATA.name}</h1>
 				<p class="subtitle">Software Engineer & Designer</p>
@@ -60,11 +65,6 @@ const NAV_MENU_ITEMS = [
 							rel="noopener">{DATA.currentOrg.name}</a
 						>.
 					</p>
-				</div>
-			</div>
-			<div class="profile-image">
-				<div class="image-container">
-					<Image src={PassportPhoto} alt={DATA.name} />
 				</div>
 			</div>
 		</section>
