@@ -3,16 +3,45 @@ import Layout from "../layouts/Layout.astro";
 import TimelineItem from "../components/TimelineItem.astro";
 import WritingItem from "../components/WritingItem.astro";
 import DATA from "../constants/static-data";
+import { Image } from "astro:assets";
+import PassportPhoto from "../assets/self_passport_photo_2.jpg";
+
+const NAV_MENU_ITEMS = [
+	{
+		name: "About",
+		href: "about",
+	},
+	{
+		name: "Work & Education",
+		href: "experience",
+	},
+	{
+		name: "Writings",
+		href: "writings",
+	},
+	{
+		name: "Contact",
+		href: "contact",
+	},
+];
 ---
 
 <Layout title={DATA.name}>
 	<main>
 		<nav>
 			<div class="nav-links">
-				<a href="#about">About</a>
-				<a href="#experience">Work & Education</a>
-				<a href="#writings">Writings</a>
-				<a href="#contact">Contact</a>
+				{
+					NAV_MENU_ITEMS.map(({ name, href }) => (
+						<a href={href}>{name}</a>
+					))
+				}
+				<button
+					id="theme-toggle"
+					class="theme-toggle"
+					aria-label="Toggle theme"
+				>
+					🌙
+				</button>
 			</div>
 		</nav>
 
@@ -35,10 +64,7 @@ import DATA from "../constants/static-data";
 			</div>
 			<div class="profile-image">
 				<div class="image-container">
-					<img
-						src="https://as1.ftcdn.net/v2/jpg/08/61/58/26/1000_F_861582695_e3tGRS5lp5D2qQvtL0gHqDALjREBGPik.jpg"
-						alt={DATA.name}
-					/>
+					<Image src={PassportPhoto} alt={DATA.name} />
 				</div>
 			</div>
 		</section>
@@ -77,21 +103,15 @@ import DATA from "../constants/static-data";
 			<div class="section-container" id="writings">
 				<h2>Writings</h2>
 				<ul class="writings-list">
-					<!-- <WritingItem
-						title="Building Scalable Systems with Rust"
-						year="2023"
-						href="#"
-					/> -->
-					<!-- <WritingItem
-						title="The Future of Web Development"
-						year="2023"
-						href="#"
-					/> -->
-					<WritingItem
-						title="Understanding Modern JavaScript"
-						year="2022"
-						href="#"
-					/>
+					{
+						DATA.writings.map(({ title, link, date }) => (
+							<WritingItem
+								title={title}
+								year={date}
+								href={link}
+							/>
+						))
+					}
 				</ul>
 			</div>
 
@@ -107,9 +127,6 @@ import DATA from "../constants/static-data";
 							</li>
 						))
 					}
-					<!-- <li>
-						<a href="mailto:your@email.com">Email</a>
-					</li> -->
 				</ul>
 			</div>
 		</section>
@@ -117,6 +134,14 @@ import DATA from "../constants/static-data";
 </Layout>
 
 <style lang="scss">
+	.theme-toggle {
+		background: none;
+		border: none;
+		font-size: 1.5rem;
+		cursor: pointer;
+		margin-left: auto;
+	}
+
 	main {
 		max-width: 780px;
 		margin: 0 auto;
@@ -167,6 +192,8 @@ import DATA from "../constants/static-data";
 			height: 100%;
 			position: relative;
 			overflow: hidden;
+			border: 2px solid yellow;
+			border-radius: 0.5rem;
 
 			&::before {
 				content: "";
@@ -291,3 +318,37 @@ import DATA from "../constants/static-data";
 		}
 	}
 </style>
+
+<script>
+	// Detect browser/system theme preference
+	const getPreferredTheme = () => {
+		if (localStorage.getItem("theme")) {
+			return localStorage.getItem("theme");
+		}
+		return window.matchMedia("(prefers-color-scheme: dark)").matches
+			? "dark"
+			: "light";
+	};
+
+	// Apply the preferred theme
+	const preferredTheme = getPreferredTheme();
+	if (preferredTheme)
+		document.documentElement.setAttribute("data-theme", preferredTheme);
+
+	// Update toggle button icon
+	const themeToggle = document.getElementById("theme-toggle");
+	if (themeToggle) {
+		themeToggle.textContent = preferredTheme === "light" ? "🌙" : "☀️";
+
+		themeToggle.addEventListener("click", () => {
+			const currentTheme =
+				document.documentElement.getAttribute("data-theme");
+			const newTheme = currentTheme === "light" ? "dark" : "light";
+			document.documentElement.setAttribute("data-theme", newTheme);
+			localStorage.setItem("theme", newTheme);
+
+			// Update toggle button icon
+			themeToggle.textContent = newTheme === "light" ? "🌙" : "☀️";
+		});
+	}
+</script>

@@ -49,6 +49,13 @@ const fullData = {
             endDate: 'Jul 2018'
         }
     ],
+    writings: [
+        {
+            title: 'Mistakes are way to learn!',
+            link: 'writings/mistakes-are-way-to-learn',
+            date: 'Mar 5, 2023'
+        }
+    ],
     contact: [
         {
             name: 'LinkedIn',
