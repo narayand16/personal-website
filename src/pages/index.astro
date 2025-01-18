@@ -32,7 +32,7 @@ const NAV_MENU_ITEMS = [
 			<div class="nav-links">
 				{
 					NAV_MENU_ITEMS.map(({ name, href }) => (
-						<a href={href}>{name}</a>
+						<a href={`#${href}`}>{name}</a>
 					))
 				}
 				<button
@@ -46,6 +46,11 @@ const NAV_MENU_ITEMS = [
 		</nav>
 
 		<section class="intro" id="about">
+			<div class="profile-image">
+				<div class="image-container">
+					<Image src={PassportPhoto} alt={DATA.name} />
+				</div>
+			</div>
 			<div class="intro-content">
 				<h1>{DATA.name}</h1>
 				<p class="subtitle">Software Engineer & Designer</p>
@@ -60,11 +65,6 @@ const NAV_MENU_ITEMS = [
 							rel="noopener">{DATA.currentOrg.name}</a
 						>.
 					</p>
-				</div>
-			</div>
-			<div class="profile-image">
-				<div class="image-container">
-					<Image src={PassportPhoto} alt={DATA.name} />
 				</div>
 			</div>
 		</section>
@@ -143,7 +143,7 @@ const NAV_MENU_ITEMS = [
 	}
 
 	main {
-		max-width: 780px;
+		max-width: 48.75rem; // ~780px;
 		margin: 0 auto;
 		padding: 2rem;
 	}
@@ -184,15 +184,15 @@ const NAV_MENU_ITEMS = [
 
 	.profile-image {
 		flex-shrink: 0;
-		width: 200px;
-		height: 200px;
+		width: 12.5rem;
+		height: 12.5rem;
 
 		.image-container {
 			width: 100%;
 			height: 100%;
 			position: relative;
 			overflow: hidden;
-			border: 2px solid yellow;
+			border: 0.25rem solid #f4a460;
 			border-radius: 0.5rem;
 
 			&::before {
@@ -283,7 +283,7 @@ const NAV_MENU_ITEMS = [
 		}
 	}
 
-	@media (max-width: 768px) {
+	@media (max-width: 48rem) {
 		main {
 			padding: 1.5rem;
 		}
@@ -299,9 +299,8 @@ const NAV_MENU_ITEMS = [
 		}
 
 		.profile-image {
-			width: 150px;
-			height: 150px;
-			margin: 0 auto;
+			width: 9.375rem;
+			height: 9.375rem;
 		}
 
 		h1 {
