@@ -12,12 +12,12 @@ const NAV_MENU_ITEMS = [
 		href: "about",
 	},
 	{
-		name: "Work & Education",
-		href: "experience",
-	},
-	{
 		name: "Writings",
 		href: "writings",
+	},
+	{
+		name: "Work & Education",
+		href: "experience",
 	},
 	{
 		name: "Contact",
@@ -70,6 +70,21 @@ const NAV_MENU_ITEMS = [
 		</section>
 
 		<section class="content">
+			<div class="section-container" id="writings">
+				<h2>Writings</h2>
+				<ul class="writings-list">
+					{
+						DATA.writings.map(({ title, link, date }) => (
+							<WritingItem
+								title={title}
+								year={date}
+								href={link}
+							/>
+						))
+					}
+				</ul>
+			</div>
+
 			<div class="section-container" id="experience">
 				<h2>Work & Education</h2>
 				<ul class="timeline-list">
@@ -96,21 +111,6 @@ const NAV_MENU_ITEMS = [
 								/>
 							),
 						)
-					}
-				</ul>
-			</div>
-
-			<div class="section-container" id="writings">
-				<h2>Writings</h2>
-				<ul class="writings-list">
-					{
-						DATA.writings.map(({ title, link, date }) => (
-							<WritingItem
-								title={title}
-								year={date}
-								href={link}
-							/>
-						))
 					}
 				</ul>
 			</div>
