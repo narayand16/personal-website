@@ -1,12 +1,12 @@
 ---
-layout: ../../layouts/Layout.astro
+layout: ../../layouts/BlogPostLayout.astro
 title: "Mistakes Are the Way to Learn!"
 author: "Narayan Deshmukh"
 date: "Mar 05, 2023"
 
 ---
 
-# Mistakes Are the Way to Learn!
+<!-- # Mistakes Are the Way to Learn! -->
 
 Recently, I was doing ice skating for the first time in my life. After stepping onto the ice surface, I couldn't balance myself and suddenly fell down. The first thought that came to my mind was: *Did anyone see me falling down?* But no one was looking at me—they were busy enjoying their skating. 
 
